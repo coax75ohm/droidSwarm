@@ -20,7 +20,7 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
     private static final int WASP_ACC = 5;	// maximum acceleration of wasp
     private static final int BEE_VEL  = 11;	// maximum bee velocity
     private static final int WASP_VEL = 12;	// maximum wasp velocity
-    private static final int BORDER   = 20;	// wasp won't go closer than this to the edges
+    private static final int BORDER   = 50;	// wasp won't go closer than this to the edges
     private static final int DELAY    = 40;	// millisecond delay between updates
     
     int[] wasp_x = new int[2];
