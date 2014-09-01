@@ -14,28 +14,28 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder holder;
     private Canvas canvas;
     
-    private static final int BEES     = 20;		// number of bees
-    private static final int REPEAT   = 3;		// number of time positions recorded
-    private static final int BEE_ACC  = 3;		// acceleration of bees
-    private static final int WASP_ACC = 5;		// maximum acceleration of wasp
-    private static final int BEE_VEL  = 11;		// maximum bee velocity
-    private static final int WASP_VEL = 12;		// maximum wasp velocity
-    private static final int BORDER   = 10;		// wasp won't go closer than this to the edges
-    private static final int DELAY    = 40;		// millisecond delay between updates
+    private static final int BEES     = 20;	// number of bees
+    private static final int REPEAT   = 3;	// number of time positions recorded
+    private static final int BEE_ACC  = 3;	// acceleration of bees
+    private static final int WASP_ACC = 5;	// maximum acceleration of wasp
+    private static final int BEE_VEL  = 11;	// maximum bee velocity
+    private static final int WASP_VEL = 12;	// maximum wasp velocity
+    private static final int BORDER   = 20;	// wasp won't go closer than this to the edges
+    private static final int DELAY    = 40;	// millisecond delay between updates
     
-    float[] wasp_x = new float[2];
-    float[] wasp_y = new float[2];
-    float wasp_xv;
-    float wasp_yv;
+    int[] wasp_x = new int[2];
+    int[] wasp_y = new int[2];
+    int wasp_xv;
+    int wasp_yv;
     
-    float[][] bee_x = new float[BEES][REPEAT];
-    float[][] bee_y = new float[BEES][REPEAT];
-    float[] bee_xv  = new float[BEES];
-    float[] bee_yv  = new float[BEES];
+    int[][] bee_x = new int[BEES][REPEAT];
+    int[][] bee_y = new int[BEES][REPEAT];
+    int[] bee_xv  = new int[BEES];
+    int[] bee_yv  = new int[BEES];
     
     Paint wasp_p, bee_p;
 
-    float dx, dy, distance;
+    int dx, dy, distance;
     
     public SwarmView(Context context) {
         super(context);
@@ -54,8 +54,8 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
             	canvas = null;
 
                 // initialize wasp
-            	wasp_x[0] = (float)(Math.random() * (width - 2 * BORDER) + BORDER);
-                wasp_y[0] = (float)(Math.random() * (height - 2 * BORDER) + BORDER);
+            	wasp_x[0] = (int)(Math.random() * (float)((width - 2 * BORDER) + BORDER));
+                wasp_y[0] = (int)(Math.random() * (float)((height - 2 * BORDER) + BORDER));
                 wasp_x[1] = wasp_x[0];
                 wasp_y[1] = wasp_y[0];
                 
@@ -68,8 +68,8 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
 
                 // initialize bees
                 for(int i = 0; i < BEES; i++) {
-                	bee_x[i][0] = (float)(Math.random() * width);
-                	bee_y[i][0] = (float)(Math.random() * height);
+                	bee_x[i][0] = (int)(Math.random() * (float)width);
+                	bee_y[i][0] = (int)(Math.random() * (float)height);
                 	bee_x[i][1] = bee_x[i][0];
                 	bee_y[i][1] = bee_y[i][0];
                 	
@@ -117,11 +117,11 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
                 	wasp_y[0] = wasp_y[1] + wasp_yv;
 
                 	// bounce checks
-                	if((wasp_x[0] < BORDER) || (wasp_x[0] > (width - BORDER -1))) {
+                	if((wasp_x[0] < BORDER) || (wasp_x[0] > (width - BORDER - 1))) {
                 		wasp_xv = -wasp_xv;
                 		wasp_x[0] += wasp_xv;
                 	}
-                	if((wasp_y[0] < BORDER) || (wasp_y[0] > (height - BORDER -1))) {
+                	if((wasp_y[0] < BORDER) || (wasp_y[0] > (height - BORDER - 1))) {
                 		wasp_yv = -wasp_yv;
                 		wasp_y[0] += wasp_yv;
                 	}
@@ -142,8 +142,8 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
                     	dx = wasp_x[1] - bee_x[i][1];
                     	dy = wasp_y[1] - bee_y[i][1];
                     	distance = Math.abs(dx) + Math.abs(dy);	// approximation
-                    	if(distance < 1F) {
-                    		distance = 1F;
+                    	if(distance < 1) {
+                    		distance = 1;
                     	}
                     	bee_xv[i] += (dx * BEE_ACC) / distance;
                 		bee_yv[i] += (dy * BEE_ACC) / distance;
@@ -202,7 +202,8 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceDestroyed(SurfaceHolder sh) { }
     
-    private float randPlusMinus(float v) {
-    	return (float)(Math.random() * v) - (v / 2);
+    private int randPlusMinus(int r) {
+        float fr = (float)r;
+    	return (int)((Math.random() * fr) - (fr / 2F));
     }
 }
