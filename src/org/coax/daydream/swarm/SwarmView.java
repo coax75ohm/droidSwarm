@@ -70,9 +70,12 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
                 for(int i = 0; i < BEES; i++) {
                     bee_x[i][0] = (int)(Math.random() * width);
                     bee_y[i][0] = (int)(Math.random() * height);
-                    bee_x[i][1] = bee_x[i][0];
-                    bee_y[i][1] = bee_y[i][0];
                     
+                    for(int j = 1; j < REPEAT; j++) {
+                        bee_x[i][j] = bee_x[i][j-1];
+                        bee_y[i][j] = bee_y[i][j-1];
+                    }
+
                     bee_xv[i] = randPlusMinus(7);
                     bee_yv[i] = randPlusMinus(7);
                 }
