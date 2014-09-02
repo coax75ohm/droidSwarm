@@ -133,10 +133,10 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
                     // <=- bees -=>
                     for(int i = 0; i < BEES; i++) {
                         // age the arrays
-                        bee_x[i][2] = bee_x[i][1];
-                        bee_x[i][1] = bee_x[i][0];
-                        bee_y[i][2] = bee_y[i][1];
-                        bee_y[i][1] = bee_y[i][0];
+                        for(int j = REPEAT - 1; j > 0; j--) {
+                            bee_x[i][j] = bee_x[i][j-1];
+                            bee_y[i][j] = bee_y[i][j-1];
+                        }
                         
                         // accelerate
                         dx = wasp_x[1] - bee_x[i][1];
@@ -175,8 +175,9 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
                     
                     //bees
                     for(int i = 0; i < BEES; i++) {
-                        canvas.drawLine(bee_x[i][1], bee_y[i][1], bee_x[i][2], bee_y[i][2], bee_p);
-                        canvas.drawLine(bee_x[i][0], bee_y[i][0], bee_x[i][1], bee_y[i][1], bee_p);
+                        for(int j = REPEAT - 1; j > 0; j--) {
+                            canvas.drawLine(bee_x[i][j-1], bee_y[i][j-1], bee_x[i][j], bee_y[i][j], bee_p);
+                        }
                     }
                     
                     // all done
@@ -203,10 +204,10 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceDestroyed(SurfaceHolder sh) { }
     
     private int randPlusMinus(int r) {
-    	// end of range = ±ceiling(r/2)
-        // truncated distribution: zero on end of range, double on zero
-    	//return (int)((Math.random() * r) - (r / 2D));
-    	// rounded distribution: half on end of range, normal on zero
-     	return (int)Math.round((Math.random() * r) - (r / 2D));
+         // end of range = ±ceiling(r/2)
+         // truncated distribution: zero on end of range, double on zero
+         //return (int)((Math.random() * r) - (r / 2D));
+         // rounded distribution: half on end of range, normal on zero
+         return (int)Math.round((Math.random() * r) - (r / 2D));
     }
 }
