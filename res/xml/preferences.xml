@@ -1,0 +1,8 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference android:title="Bee Trail Length"
+                    android:summary=""
+                    android:key="REPEAT"
+                    android:entries="@array/repeatArray"
+                    android:entryValues="@array/repeatValues"
+                    android:defaultValue="3" />
+</PreferenceScreen>
