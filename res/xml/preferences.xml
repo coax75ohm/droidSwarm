@@ -1,12 +1,80 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <EditTextPreference android:title="Number of Bees"
+    <EditTextPreference android:title="@string/pref_num_bees"
                         android:summary=""
                         android:inputType="number"
                         android:key="BEES"
-                        android:defaultValue="20" />
-    <EditTextPreference android:title="Bee Trail Length"
+                        android:defaultValue="@string/def_num_bees" />
+
+    <EditTextPreference android:title="@string/pref_bee_trail"
                         android:summary=""
                         android:inputType="number"
                         android:key="TRAIL"
-                        android:defaultValue="2" />
+                        android:defaultValue="@string/def_bee_trail" />
+
+    <EditTextPreference android:title="@string/pref_bee_acc"
+                        android:summary=""
+                        android:inputType="number"
+                        android:key="BEE_ACC"
+                        android:defaultValue="@string/def_bee_acc" />
+
+    <EditTextPreference android:title="@string/pref_wasp_acc"
+                        android:summary=""
+                        android:inputType="number"
+                        android:key="WASP_ACC"
+                        android:defaultValue="@string/def_wasp_acc" />
+
+    <EditTextPreference android:title="@string/pref_bee_vel"
+                        android:summary=""
+                        android:inputType="number"
+                        android:key="BEE_VEL"
+                        android:defaultValue="@string/def_bee_vel" />
+
+    <EditTextPreference android:title="@string/pref_wasp_vel"
+                        android:summary=""
+                        android:inputType="number"
+                        android:key="WASP_VEL"
+                        android:defaultValue="@string/def_wasp_vel" />
+
+    <EditTextPreference android:title="@string/pref_border"
+                        android:summary=""
+                        android:inputType="number"
+                        android:key="BORDER"
+                        android:defaultValue="@string/def_border" />
+
+    <EditTextPreference android:title="@string/pref_delay"
+                        android:summary=""
+                        android:inputType="number"
+                        android:key="DELAY"
+                        android:defaultValue="@string/def_delay" />
+
+    <EditTextPreference android:title="@string/pref_lwidth"
+                        android:summary=""
+                        android:inputType="number"
+                        android:key="LWIDTH"
+                        android:defaultValue="@string/def_lwidth" />
+
+    <ListPreference     android:title="@string/pref_wasp_color"
+                        android:summary=""
+                        android:entries="@array/colors"
+                        android:entryValues="@array/colors"
+                        android:key="WASP_COLOR"
+                        android:defaultValue="@string/def_wasp_color" />
+
+    <ListPreference     android:title="@string/pref_bee_color"
+                        android:summary=""
+                        android:entries="@array/colors"
+                        android:entryValues="@array/colors"
+                        android:key="BEE_COLOR"
+                        android:defaultValue="@string/def_bee_color" />
+
+    <ListPreference     android:title="@string/pref_back_color"
+                        android:summary=""
+                        android:entries="@array/colors"
+                        android:entryValues="@array/colors"
+                        android:key="BACK_COLOR"
+                        android:defaultValue="@string/def_back_color" />
+
+    <CheckBoxPreference android:title="@string/pref_aalias"
+                        android:key="AALIAS"
+                        android:defaultValue="@string/def_aalias" />
 </PreferenceScreen>

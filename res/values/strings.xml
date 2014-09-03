@@ -1,10 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Swarm</string>
+
+    <string name="pref_num_bees">Number of Bees</string>
     <string name="def_num_bees">20</string>
     <string name="min_num_bees">1</string>
     <string name="max_num_bees">100</string>
+
+    <string name="pref_bee_trail">Bee Trail Length</string>
     <string name="def_bee_trail">2</string>
     <string name="min_bee_trail">1</string>
     <string name="max_bee_trail">100</string>
+
+    <string name="pref_bee_acc">Maximum Bee Acceleration</string>
+    <string name="def_bee_acc">3</string>
+    <string name="min_bee_acc">1</string>
+    <string name="max_bee_acc">10</string>
+
+    <string name="pref_wasp_acc">Maximum Wasp Acceleration</string>
+    <string name="def_wasp_acc">5</string>
+    <string name="min_wasp_acc">1</string>
+    <string name="max_wasp_acc">10</string>
+
+    <string name="pref_bee_vel">Maximum Bee Velocity</string>
+    <string name="def_bee_vel">11</string>
+    <string name="min_bee_vel">1</string>
+    <string name="max_bee_vel">20</string>
+
+    <string name="pref_wasp_vel">Maximum Wasp Velocity</string>
+    <string name="def_wasp_vel">12</string>
+    <string name="min_wasp_vel">1</string>
+    <string name="max_wasp_vel">20</string>
+
+    <string name="pref_border">Wasp Border</string>
+    <string name="def_border">50</string>
+    <string name="min_border">1</string>
+    <string name="max_border">100</string>
+
+    <string name="pref_delay">Animation Delay (ms)</string>
+    <string name="def_delay">40</string>
+    <string name="min_delay">10</string>
+    <string name="max_delay">100</string>
+
+    <string name="pref_lwidth">Line Width</string>
+    <string name="def_lwidth">1</string>
+    <string name="min_lwidth">1</string>
+    <string name="max_lwidth">10</string>
+
+    <string name="pref_wasp_color">Wasp Color</string>
+    <string name="def_wasp_color">Red</string>
+
+    <string name="pref_bee_color">Bee Color</string>
+    <string name="def_bee_color">Yellow</string>
+
+    <string name="pref_back_color">Background Color</string>
+    <string name="def_back_color">Black</string>
+
+    <string name="pref_aalias">Use Anti-aliasing</string>
+    <string name="def_aalias">false</string>
 </resources>

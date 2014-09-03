@@ -17,17 +17,19 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder holder;
     private SharedPreferences sharedpreferences;
 
-    //private static final int BEES     = 20;  // number of bees
-    //private static final int REPEAT   = 3;   // number of time positions recorded
-    private static final int BEE_ACC  = 3;   // acceleration of bees
-    private static final int WASP_ACC = 5;   // maximum acceleration of wasp
-    private static final int BEE_VEL  = 11;  // maximum bee velocity
-    private static final int WASP_VEL = 12;  // maximum wasp velocity
-    private static final int BORDER   = 50;  // wasp won't go closer than this to the edges
-    private static final int DELAY    = 40;  // millisecond delay between updates
-
-    private int BEES;
-    private int REPEAT;
+    private int BEES;           // number of bees
+    private int REPEAT;         // number of time positions recorded
+    private int BEE_ACC;        // maximum acceleration of bees
+    private int WASP_ACC;       // maximum acceleration of wasp
+    private int BEE_VEL;        // maximum bee velocity
+    private int WASP_VEL;       // maximum wasp velocity
+    private int BORDER;         // wasp won't go closer than this to the edges
+    private int DELAY;          // millisecond delay between updates
+    private int LWIDTH;         // line stroke width
+    private boolean AALIAS;     // use anti-aliasing
+    private String WASP_COLOR;  // wasp color
+    private String BEE_COLOR;   // bee color
+    private String BACK_COLOR;  // background color
 
     int[] wasp_x;
     int[] wasp_y;
@@ -60,9 +62,20 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
 
                 canvas = null;
 
-                BEES = Integer.parseInt(sharedpreferences.getString("BEES", "20"));
+                BEES       = Integer.parseInt(sharedpreferences.getString("BEES", "20"));
                 // add one here since the preference is for number of segments, not points
-                REPEAT = Integer.parseInt(sharedpreferences.getString("TRAIL", "2")) + 1;
+                REPEAT     = Integer.parseInt(sharedpreferences.getString("TRAIL", "2")) + 1;
+                BEE_ACC    = Integer.parseInt(sharedpreferences.getString("BEE_ACC", "3"));
+                WASP_ACC   = Integer.parseInt(sharedpreferences.getString("WASP_ACC", "5"));
+                BEE_VEL    = Integer.parseInt(sharedpreferences.getString("BEE_VEL", "11"));
+                WASP_VEL   = Integer.parseInt(sharedpreferences.getString("WASP_VEL", "12"));
+                BORDER     = Integer.parseInt(sharedpreferences.getString("BORDER", "50"));
+                DELAY      = Integer.parseInt(sharedpreferences.getString("DELAY", "40"));
+                LWIDTH     = Integer.parseInt(sharedpreferences.getString("LWIDTH", "1"));
+                AALIAS     = sharedpreferences.getBoolean("AALIAS", false);
+                WASP_COLOR = sharedpreferences.getString("WASP_COLOR", "Red");
+                BEE_COLOR  = sharedpreferences.getString("BEE_COLOR", "Yellow");
+                BACK_COLOR = sharedpreferences.getString("BACK_COLOR", "Black");
 
                 // initialize wasp
                 wasp_x = new int[2];
@@ -76,9 +89,11 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
                 wasp_yv = 0;
 
                 wasp_p = new Paint();
-                //wasp_p.setAntiAlias(true);
-                wasp_p.setColor(Color.RED);
-
+                wasp_p.setColor(Color.parseColor(WASP_COLOR));
+                wasp_p.setStrokeCap(Paint.Cap.ROUND);
+                wasp_p.setStrokeWidth(LWIDTH);
+                wasp_p.setAntiAlias(AALIAS);
+                
                 // initialize bees
                 int[][] bee_x = new int[BEES][REPEAT];
                 int[][] bee_y = new int[BEES][REPEAT];
@@ -98,8 +113,10 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
                 }
 
                 bee_p = new Paint();
-                //bee_p.setAntiAlias(true);
-                bee_p.setColor(Color.YELLOW);
+                bee_p.setColor(Color.parseColor(BEE_COLOR));
+                bee_p.setStrokeCap(Paint.Cap.ROUND);
+                bee_p.setStrokeWidth(LWIDTH);
+                bee_p.setAntiAlias(AALIAS);
 
                 // animation loop
                 while (true) {
@@ -188,10 +205,7 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
                     }
 
                     // erase previous, draw current
-                    canvas.drawColor(Color.BLACK);
-
-                    // wasp
-                    canvas.drawLine(wasp_x[0], wasp_y[0], wasp_x[1], wasp_y[1], wasp_p);
+                    canvas.drawColor(Color.parseColor(BACK_COLOR));
 
                     //bees
                     for(int i = 0; i < BEES; i++) {
@@ -199,6 +213,9 @@ public class SwarmView extends SurfaceView implements SurfaceHolder.Callback {
                             canvas.drawLine(bee_x[i][j-1], bee_y[i][j-1], bee_x[i][j], bee_y[i][j], bee_p);
                         }
                     }
+
+                    // wasp, draw last so it isn't obscured by bees
+                    canvas.drawLine(wasp_x[0], wasp_y[0], wasp_x[1], wasp_y[1], wasp_p);
 
                     // all done
                     holder.unlockCanvasAndPost(canvas);
