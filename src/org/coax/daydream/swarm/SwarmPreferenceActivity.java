@@ -109,7 +109,7 @@ public class SwarmPreferenceActivity extends PreferenceActivity {
         def_lwidth     = getResources().getString(R.string.def_lwidth);
         min_lwidth     = getResources().getString(R.string.min_lwidth);
         max_lwidth     = getResources().getString(R.string.max_lwidth);
-}
+    }
 
     public static class SwarmPreferenceFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
         @Override
@@ -300,7 +300,6 @@ public class SwarmPreferenceActivity extends PreferenceActivity {
                 }
                 return;
             }
-
         }
     }
 }
