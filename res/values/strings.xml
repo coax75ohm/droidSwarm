@@ -1,3 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Swarm</string>
+    <string name="def_num_bees">20</string>
+    <string name="min_num_bees">1</string>
+    <string name="max_num_bees">100</string>
+    <string name="def_bee_trail">2</string>
+    <string name="min_bee_trail">1</string>
+    <string name="max_bee_trail">100</string>
 </resources>
